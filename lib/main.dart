@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:task_manager/common/utils/constants.dart';
-import 'package:task_manager/features/auth/pages/test_page.dart';
 import 'package:task_manager/features/onboarding/pages/onboarding.dart';
 
 import 'features/todo/pages/homepage.dart';
@@ -31,7 +30,7 @@ class MyApp extends StatelessWidget {
             useMaterial3: true,
           ),
           themeMode: ThemeMode.dark,
-          home: const TestPage(),
+          home: const HomePage(),
         );
       }
     );

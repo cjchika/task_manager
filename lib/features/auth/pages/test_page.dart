@@ -12,7 +12,7 @@ class TestPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     String text = ref.watch(codeStateProvider);
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(backgroundColor: AppConst.kBkDark,),
       body: Center(
         child: Column(
           children: [

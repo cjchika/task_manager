@@ -9,6 +9,7 @@ import 'package:task_manager/common/widgets/height_spacer.dart';
 import 'package:task_manager/common/widgets/reusable_text.dart';
 import 'package:task_manager/common/widgets/width_spacer.dart';
 import 'package:task_manager/common/widgets/xpansion_tile.dart';
+import 'package:task_manager/features/todo/controllers/xpansion_provider.dart';
 import 'package:task_manager/features/todo/widgets/todo_tile.dart';
 
 class HomePage extends ConsumerStatefulWidget {
@@ -176,11 +177,11 @@ class _HomePageState extends ConsumerState<HomePage>
                     color: AppConst.kBkLight,
                     height: AppConst.kHeight * 0.3,
                     child: ListView(
-                      children: [
+                      children: const [
                         ToDoTile(
                           start: "04:15",
                           end: "12:00",
-                          switcher: const Icon(Icons.check_circle),
+                          switcher: Icon(Icons.check_circle),
                         )
                       ],
                     ),
@@ -189,10 +190,30 @@ class _HomePageState extends ConsumerState<HomePage>
               ),
             ),
             const HeightSpacer(height: 10),
-            const XpansionTile(
+            XpansionTile(
               text: "Tomorrow's Task",
               text2: "Upcoming tasks show here.",
-              children: [],
+              onExpansionChanged: (bool expanded) =>
+                  ref.read(xpansionStateProvider.notifier).setStart(!expanded),
+              trailing: Padding(
+                padding: EdgeInsets.only(right: 12.0.w),
+                child: ref.watch(xpansionStateProvider)
+                    ? const Icon(
+                        AntDesign.circledown,
+                        color: AppConst.kLight,
+                      )
+                    : const Icon(
+                        AntDesign.closecircleo,
+                        color: AppConst.kBlueLight,
+                      ),
+              ),
+              children: [
+                ToDoTile(
+                  start: "02:15",
+                  end: "05:00",
+                  switcher: Switch(value: false, onChanged: (value) {}),
+                )
+              ],
             ),
             const HeightSpacer(height: 10),
             XpansionTile(
@@ -201,7 +222,27 @@ class _HomePageState extends ConsumerState<HomePage>
                   .toString()
                   .substring(5, 10),
               text2: "Future tasks show here.",
-              children: [],
+              onExpansionChanged: (bool expanded ) =>
+                  ref.read(xpansionState0Provider.notifier).setStart(!expanded),
+              trailing: Padding(
+                padding: EdgeInsets.only(right: 12.0.w),
+                child: ref.watch(xpansionState0Provider)
+                    ? const Icon(
+                  AntDesign.circledown,
+                  color: AppConst.kLight,
+                )
+                    : const Icon(
+                  AntDesign.closecircleo,
+                  color: AppConst.kBlueLight,
+                ),
+              ),
+              children: [
+                ToDoTile(
+                  start: "02:15",
+                  end: "05:00",
+                  switcher: Switch(value: false, onChanged: (value) {}),
+                )
+              ],
             )
           ],
         ),
