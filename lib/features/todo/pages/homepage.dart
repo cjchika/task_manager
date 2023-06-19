@@ -13,6 +13,9 @@ import 'package:task_manager/features/todo/controllers/xpansion_provider.dart';
 import 'package:task_manager/features/todo/pages/add_task.dart';
 import 'package:task_manager/features/todo/widgets/todo_tile.dart';
 
+import '../controllers/todo/todo_provider.dart';
+import '../widgets/today_task.dart';
+
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
 
@@ -28,6 +31,7 @@ class _HomePageState extends ConsumerState<HomePage>
 
   @override
   Widget build(BuildContext context) {
+    ref.watch(todoStateProvider.notifier).refresh();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -171,25 +175,17 @@ class _HomePageState extends ConsumerState<HomePage>
                   Container(
                     color: AppConst.kBkLight,
                     height: AppConst.kHeight * 0.3,
+                    child: const TodayTask()
+                  ),
+                  Container(
+                    color: AppConst.kBkLight,
+                    height: AppConst.kHeight * 0.3,
                     child: ListView(
                       children: [
                         ToDoTile(
                           start: "04:15",
                           end: "12:00",
                           switcher: Switch(value: true, onChanged: (value) {}),
-                        )
-                      ],
-                    ),
-                  ),
-                  Container(
-                    color: AppConst.kBkLight,
-                    height: AppConst.kHeight * 0.3,
-                    child: ListView(
-                      children: const [
-                        ToDoTile(
-                          start: "04:15",
-                          end: "12:00",
-                          switcher: Icon(Icons.check_circle),
                         )
                       ],
                     ),

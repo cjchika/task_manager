@@ -9,7 +9,9 @@ import 'package:task_manager/common/widgets/custom_btn_otl.dart';
 import 'package:task_manager/common/widgets/custom_text_field.dart';
 import 'package:task_manager/common/widgets/height_spacer.dart';
 import 'package:task_manager/common/widgets/reusable_text.dart';
+import 'package:task_manager/features/todo/controllers/todo/todo_provider.dart';
 
+import '../../../common/models/task_model.dart';
 import '../controllers/dates/dates_provider.dart';
 
 class AddTask extends ConsumerStatefulWidget {
@@ -100,10 +102,10 @@ class _AddTaskState extends ConsumerState<AddTask> {
                   onTap: () {
                     picker.DatePicker.showDateTimePicker(context,
                         showTitleActions: true, onConfirm: (date) {
-                          ref
-                              .read(endTimeStateProvider.notifier)
-                              .setEndTime(date.toString());
-                        }, locale: picker.LocaleType.en);
+                      ref
+                          .read(endTimeStateProvider.notifier)
+                          .setEndTime(date.toString());
+                    }, locale: picker.LocaleType.en);
                   },
                   width: AppConst.kWidth * 0.42,
                   height: 52.h,
@@ -116,6 +118,30 @@ class _AddTaskState extends ConsumerState<AddTask> {
             ),
             HeightSpacer(height: 15.h),
             CustomOutlineButton(
+              onTap: () {
+                if (title.text.isNotEmpty &&
+                    description.text.isNotEmpty &&
+                    scheduleDate.isNotEmpty &&
+                    scheduleStartTime.isNotEmpty &&
+                    scheduleEndTime.isNotEmpty) {
+                  Task task = Task(
+                      title: title.text,
+                      desc: description.text,
+                      isCompleted: 0,
+                      date: scheduleDate.substring(0, 10),
+                      startTime: scheduleStartTime.substring(10, 16),
+                      endTime: scheduleEndTime.substring(10, 16),
+                      reminder: 0,
+                      repeat: "yes");
+                  ref.read(todoStateProvider.notifier).addTask(task);
+                  ref.read(datesStateProvider.notifier).setDate("");
+                  ref.read(startTimeStateProvider.notifier).setStartTime("");
+                  ref.read(endTimeStateProvider.notifier).setEndTime("");
+                  Navigator.pop(context);
+                } else {
+                  print("Error creating task");
+                }
+              },
               width: AppConst.kWidth,
               height: 52.h,
               color: AppConst.kLight,

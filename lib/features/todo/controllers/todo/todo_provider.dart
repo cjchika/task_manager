@@ -1,6 +1,10 @@
+import 'dart:math';
+
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:task_manager/common/helpers/db_helper.dart';
 import 'package:task_manager/common/models/task_model.dart';
+
+import '../../../../common/utils/constants.dart';
 part 'todo_provider.g.dart';
 
 @riverpod
@@ -18,6 +22,12 @@ class TodoState extends _$TodoState{
   void addTask(Task task) async {
     await DBHelper.createTask(task);
     refresh();
+  }
+
+  dynamic getRandomColor() {
+    Random random = Random();
+    int randomIndex = random.nextInt(colors.length);
+    return colors[randomIndex];
   }
 
   void updateTask(int id, String title, String desc,
