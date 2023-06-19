@@ -168,7 +168,7 @@ class _HomePageState extends ConsumerState<HomePage>
                         ToDoTile(
                           start: "04:15",
                           end: "12:00",
-                          switcher: Switch(value: false, onChanged: (value) {}),
+                          switcher: Switch(value: true, onChanged: (value) {}),
                         )
                       ],
                     ),

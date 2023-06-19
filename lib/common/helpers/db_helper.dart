@@ -26,15 +26,6 @@ class DBHelper {
     });
   }
 
-  static Future<int> createTask(Task task) async {
-    final db = await DBHelper.db();
-
-    final item = await db.insert("todos", task.toJson(),
-        conflictAlgorithm: sql.ConflictAlgorithm.replace);
-
-    return item;
-  }
-
   static Future<int> createUser(int isVerified) async {
     final db = await DBHelper.db();
 
@@ -52,6 +43,15 @@ class DBHelper {
   static Future<List<Map<String, dynamic>>> getUser() async {
     final db = await DBHelper.db();
     return db.query('user', orderBy: 'id');
+  }
+
+  static Future<int> createTask(Task task) async {
+    final db = await DBHelper.db();
+
+    final item = await db.insert("todos", task.toJson(),
+        conflictAlgorithm: sql.ConflictAlgorithm.replace);
+
+    return item;
   }
 
   static Future<List<Map<String, dynamic>>> getTasks() async {
