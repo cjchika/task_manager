@@ -1,7 +1,7 @@
 
 class UserModel {
   final int id;
-  final bool isVerified;
+  final int isVerified;
 
   UserModel({
     required this.id,
