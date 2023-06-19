@@ -175,7 +175,7 @@ class _HomePageState extends ConsumerState<HomePage>
                   Container(
                     color: AppConst.kBkLight,
                     height: AppConst.kHeight * 0.3,
-                    child: const TodayTask()
+                    child: const TodayTasks()
                   ),
                   Container(
                     color: AppConst.kBkLight,
