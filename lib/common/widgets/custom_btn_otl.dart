@@ -5,7 +5,7 @@ import 'package:task_manager/common/widgets/reusable_text.dart';
 class CustomOutlineButton extends StatelessWidget {
   const CustomOutlineButton(
       {super.key,
-      required this.onTap,
+      this.onTap,
       required this.width,
       required this.height,
       this.color2,
