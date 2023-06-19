@@ -12,6 +12,7 @@ import 'package:task_manager/common/widgets/xpansion_tile.dart';
 import 'package:task_manager/features/todo/controllers/xpansion_provider.dart';
 import 'package:task_manager/features/todo/pages/add_task.dart';
 import 'package:task_manager/features/todo/widgets/todo_tile.dart';
+import 'package:task_manager/features/todo/widgets/tomorrow_list.dart';
 
 import '../controllers/todo/todo_provider.dart';
 import '../widgets/today_task.dart';
@@ -194,31 +195,7 @@ class _HomePageState extends ConsumerState<HomePage>
               ),
             ),
             const HeightSpacer(height: 10),
-            XpansionTile(
-              text: "Tomorrow's Task",
-              text2: "Upcoming tasks show here.",
-              onExpansionChanged: (bool expanded) =>
-                  ref.read(xpansionStateProvider.notifier).setStart(!expanded),
-              trailing: Padding(
-                padding: EdgeInsets.only(right: 12.0.w),
-                child: ref.watch(xpansionStateProvider)
-                    ? const Icon(
-                        AntDesign.circledown,
-                        color: AppConst.kLight,
-                      )
-                    : const Icon(
-                        AntDesign.closecircleo,
-                        color: AppConst.kBlueLight,
-                      ),
-              ),
-              children: [
-                ToDoTile(
-                  start: "02:15",
-                  end: "05:00",
-                  switcher: Switch(value: false, onChanged: (value) {}),
-                )
-              ],
-            ),
+            const TomorrowList(),
             const HeightSpacer(height: 10),
             XpansionTile(
               text: DateTime.now()
