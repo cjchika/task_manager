@@ -8,6 +8,7 @@ import 'package:task_manager/features/todo/widgets/todo_tile.dart';
 import '../../../common/utils/constants.dart';
 import '../../../common/widgets/xpansion_tile.dart';
 import '../controllers/xpansion_provider.dart';
+import '../pages/update_task.dart';
 
 class DayAfterTomorrow extends ConsumerWidget {
   const DayAfterTomorrow({super.key});
@@ -48,7 +49,20 @@ class DayAfterTomorrow extends ConsumerWidget {
             delete: () {
               ref.read(todoStateProvider.notifier).deleteTask(task.id ??0);
             },
-            editWidget: GestureDetector(onTap: () {},
+            editWidget: GestureDetector(onTap: () {
+              taskTitle = task.title.toString();
+              taskDesc = task.desc.toString();
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => UpdateTask(
+                    id: task.id ?? 0,
+                    title: taskTitle,
+                    desc: taskDesc,
+                  ),
+                ),
+              );
+            },
               child: const Icon(MaterialCommunityIcons.circle_edit_outline),),
           )
       ],

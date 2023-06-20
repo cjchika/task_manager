@@ -26,3 +26,6 @@ List<dynamic> colors = const [
   Color(0xFF20a31E),
   Color(0xFF52033D),
 ];
+
+String taskTitle = "";
+String taskDesc = "";
