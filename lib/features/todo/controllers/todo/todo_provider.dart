@@ -59,6 +59,12 @@ class TodoState extends _$TodoState{
     return tomorrow.toString().substring(0,10);
   }
 
+  // GET DAY AFTER TOMORROW'S DATE
+  String getDayAfterTomorrow() {
+    DateTime dayAfterTomorrow = DateTime.now().add(const Duration(days: 2));
+    return dayAfterTomorrow.toString().substring(0,10);
+  }
+
   // GET LAST30DAYS' DATE
   List<String> getLast30Days() {
     DateTime today = DateTime.now();

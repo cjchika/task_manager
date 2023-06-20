@@ -11,6 +11,7 @@ import 'package:task_manager/common/widgets/width_spacer.dart';
 import 'package:task_manager/common/widgets/xpansion_tile.dart';
 import 'package:task_manager/features/todo/controllers/xpansion_provider.dart';
 import 'package:task_manager/features/todo/pages/add_task.dart';
+import 'package:task_manager/features/todo/widgets/day_after_tomorrow.dart';
 import 'package:task_manager/features/todo/widgets/todo_tile.dart';
 import 'package:task_manager/features/todo/widgets/tomorrow_list.dart';
 
@@ -197,34 +198,7 @@ class _HomePageState extends ConsumerState<HomePage>
             const HeightSpacer(height: 10),
             const TomorrowList(),
             const HeightSpacer(height: 10),
-            XpansionTile(
-              text: DateTime.now()
-                  .add(const Duration(days: 2))
-                  .toString()
-                  .substring(5, 10),
-              text2: "Future tasks show here.",
-              onExpansionChanged: (bool expanded) =>
-                  ref.read(xpansionState0Provider.notifier).setStart(!expanded),
-              trailing: Padding(
-                padding: EdgeInsets.only(right: 12.0.w),
-                child: ref.watch(xpansionState0Provider)
-                    ? const Icon(
-                        AntDesign.circledown,
-                        color: AppConst.kLight,
-                      )
-                    : const Icon(
-                        AntDesign.closecircleo,
-                        color: AppConst.kBlueLight,
-                      ),
-              ),
-              children: [
-                ToDoTile(
-                  start: "02:15",
-                  end: "05:00",
-                  switcher: Switch(value: false, onChanged: (value) {}),
-                )
-              ],
-            )
+            const DayAfterTomorrow()
           ],
         ),
       )),
