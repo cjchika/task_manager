@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "50851694475",
+    "project_id": "elearn-9c45b",
+    "storage_bucket": "elearn-9c45b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:50851694475:android:96761870f9641e4eaf918e",
+        "android_client_info": {
+          "package_name": "com.cjchika.elearn_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "50851694475-lu9btnti2ujpojcba3c437ljsi879e7b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJeTUkuzPFeDQ0uhLc-BOyZ3QaJ6ZL8nk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "50851694475-lu9btnti2ujpojcba3c437ljsi879e7b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:50851694475:android:b034bfac9cd756c5af918e",
+        "android_client_info": {
+          "package_name": "com.example.task_manager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "50851694475-lu9btnti2ujpojcba3c437ljsi879e7b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJeTUkuzPFeDQ0uhLc-BOyZ3QaJ6ZL8nk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "50851694475-lu9btnti2ujpojcba3c437ljsi879e7b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
