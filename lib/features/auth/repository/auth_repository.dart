@@ -1,8 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:task_manager/common/helpers/db_helper.dart';
 import 'package:task_manager/common/routes/routes.dart';
 import 'package:task_manager/common/widgets/show_dialogue.dart';
+
+final authRepositoryProvider = Provider((ref) {
+  return AuthRepository(auth: FirebaseAuth.instance);
+});
 
 class AuthRepository {
   final FirebaseAuth auth;
