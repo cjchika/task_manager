@@ -94,7 +94,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 padding: const EdgeInsets.all(10.0),
                 child: CustomOutlineButton(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => OtpPage()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const OtpPage(smsCodeId: '', phoneNumber: '',)));
                   },
                   width: AppConst.kWidth * 0.9,
                   height: AppConst.kHeight * 0.07,
