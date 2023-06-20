@@ -11,6 +11,7 @@ import 'package:task_manager/common/widgets/width_spacer.dart';
 import 'package:task_manager/common/widgets/xpansion_tile.dart';
 import 'package:task_manager/features/todo/controllers/xpansion_provider.dart';
 import 'package:task_manager/features/todo/pages/add_task.dart';
+import 'package:task_manager/features/todo/widgets/completed_tasks.dart';
 import 'package:task_manager/features/todo/widgets/day_after_tomorrow.dart';
 import 'package:task_manager/features/todo/widgets/todo_tile.dart';
 import 'package:task_manager/features/todo/widgets/tomorrow_list.dart';
@@ -182,15 +183,7 @@ class _HomePageState extends ConsumerState<HomePage>
                   Container(
                     color: AppConst.kBkLight,
                     height: AppConst.kHeight * 0.3,
-                    child: ListView(
-                      children: [
-                        ToDoTile(
-                          start: "04:15",
-                          end: "12:00",
-                          switcher: Switch(value: true, onChanged: (value) {}),
-                        )
-                      ],
-                    ),
+                    child: const CompletedTasks()
                   )
                 ]),
               ),
