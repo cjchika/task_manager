@@ -1,6 +1,3 @@
-import 'dart:js';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:task_manager/features/auth/pages/login_page.dart';
 import 'package:task_manager/features/auth/pages/otp_page.dart';

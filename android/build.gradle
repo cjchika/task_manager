@@ -5,10 +5,20 @@ buildscript {
         mavenCentral()
     }
 
+//    plugins {
+//        id 'com.android.application' version '7.3.1' apply false
+//        id 'com.android.library' version '7.3.1' apply false
+//        id 'com.google.gms.google-services' version '4.3.14' apply false
+//    }
+
+//    task clean(type: Delete) {
+//        delete rootProject.buildDir
+//    }
+
     dependencies {
         classpath 'com.android.tools.build:gradle:7.3.0'
         // START: FlutterFire Configuration
-        classpath 'com.google.gms:google-services:4.3.10'
+        classpath 'com.google.gms:google-services:4.3.15'
         // END: FlutterFire Configuration
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
