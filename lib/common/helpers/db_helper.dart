@@ -1,6 +1,5 @@
 import "package:flutter/material.dart";
 import 'package:sqflite/sqflite.dart' as sql;
-import 'package:task_manager/common/models/user_model.dart';
 
 import '../models/task_model.dart';
 

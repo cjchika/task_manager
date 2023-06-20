@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:task_manager/common/utils/constants.dart';
 import 'package:task_manager/features/todo/controllers/todo/todo_provider.dart';
 import 'package:task_manager/features/todo/widgets/todo_tile.dart';
 
@@ -16,29 +15,44 @@ class TodayTasks extends ConsumerWidget {
     String today = ref.read(todoStateProvider.notifier).getToday();
     var todoToday = todoList
         .where((element) =>
-    element.isCompleted == 0 && element.date!.contains(today))
+            element.isCompleted == 0 && element.date!.contains(today))
         .toList();
 
     return ListView.builder(
         itemCount: todoToday.length,
         itemBuilder: (context, index) {
-          final data = todoToday[index];
-          bool isCompleted = ref.read(todoStateProvider.notifier).getStatus(
-              data);
-          dynamic color = ref.read(todoStateProvider.notifier).getRandomColor()
-          ;
+          final task = todoToday[index];
+          bool isCompleted =
+              ref.read(todoStateProvider.notifier).getStatus(task);
+          dynamic color = ref.read(todoStateProvider.notifier).getRandomColor();
           return ToDoTile(
-              delete: () {
-                ref.read(todoStateProvider.notifier).deleteTask(data.id ??0);
+            delete: () {
+              ref.read(todoStateProvider.notifier).deleteTask(task.id ?? 0);
+            },
+            editWidget: GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => UpdateTask()));
               },
-              editWidget: GestureDetector(onTap: () {},
-                child: const Icon(MaterialCommunityIcons.circle_edit_outline),),
-              title: data.title,
-              color: color,
-              description: data.desc,
-              start: data.startTime,
-              end: data.endTime,
-              switcher: Switch(value: isCompleted, onChanged: (value) => {})
+              child: const Icon(MaterialCommunityIcons.circle_edit_outline),
+            ),
+            title: task.title,
+            color: color,
+            description: task.desc,
+            start: task.startTime,
+            end: task.endTime,
+            switcher: Switch(
+              value: isCompleted,
+              onChanged: (value) =>
+                  ref.read(todoStateProvider.notifier).markAsCompleted(
+                        task.id ?? 0,
+                        task.title.toString(),
+                        task.desc.toString(),
+                        task.isCompleted ?? 1,
+                        task.date.toString(),
+                        task.startTime.toString(),
+                        task.endTime.toString(),
+                      ),
+            ),
           );
         });
   }
