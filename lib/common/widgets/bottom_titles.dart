@@ -4,6 +4,7 @@ import 'package:task_manager/common/widgets/appstyle.dart';
 import 'package:task_manager/common/widgets/height_spacer.dart';
 import 'package:task_manager/common/widgets/reusable_text.dart';
 import 'package:task_manager/common/widgets/width_spacer.dart';
+import 'package:task_manager/features/todo/controllers/todo/todo_provider.dart';
 
 import '../utils/constants.dart';
 
@@ -25,12 +26,13 @@ class BottomTitles extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Consumer(builder: (context, ref, child) {
+              var color = ref.read(todoStateProvider.notifier).getRandomColor();
               return Container(
                 height: 80,
                 width: 5,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(14)),
-                  color: AppConst.kGreen,
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(Radius.circular(14)),
+                  color: color,
                 ),
               );
             }),

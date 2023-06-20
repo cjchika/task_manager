@@ -8,12 +8,9 @@ import 'package:task_manager/common/widgets/custom_text_field.dart';
 import 'package:task_manager/common/widgets/height_spacer.dart';
 import 'package:task_manager/common/widgets/reusable_text.dart';
 import 'package:task_manager/common/widgets/width_spacer.dart';
-import 'package:task_manager/common/widgets/xpansion_tile.dart';
-import 'package:task_manager/features/todo/controllers/xpansion_provider.dart';
 import 'package:task_manager/features/todo/pages/add_task.dart';
 import 'package:task_manager/features/todo/widgets/completed_tasks.dart';
 import 'package:task_manager/features/todo/widgets/day_after_tomorrow.dart';
-import 'package:task_manager/features/todo/widgets/todo_tile.dart';
 import 'package:task_manager/features/todo/widgets/tomorrow_list.dart';
 
 import '../controllers/todo/todo_provider.dart';
