@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:task_manager/common/helpers/db_helper.dart';
 import 'package:task_manager/common/routes/routes.dart';
+import 'package:task_manager/common/widgets/show_dialogue.dart';
 
 class AuthRepository {
   final FirebaseAuth auth;
@@ -14,16 +16,42 @@ class AuthRepository {
     required bool mounted,
   }) async {
     try {
-      final credential = PhoneAuthProvider.credential(verificationId: smsCodeId, smsCode: smsCode);
+      final credential = PhoneAuthProvider.credential(
+          verificationId: smsCodeId, smsCode: smsCode);
 
       await auth.signInWithCredential(credential);
 
-      if(!mounted){
+      if (!mounted) {
         return;
       }
       Navigator.pushNamedAndRemoveUntil(context, Routes.HOME, (route) => false);
     } on FirebaseAuth catch (e) {
-      print(e.toString());
+      showAlertDialogue(context: context, message: e.toString());
+    }
+  }
+
+  void sendOtp(
+      {required BuildContext context, required String phoneNumber}) async {
+    try {
+      await auth.verifyPhoneNumber(
+          phoneNumber: phoneNumber,
+          verificationCompleted: (PhoneAuthCredential credential) async {
+            await auth.signInWithCredential(credential);
+          },
+          verificationFailed: (e) {
+            showAlertDialogue(context: context, message: e.toString());
+          },
+          codeSent: (smsCodeId, resendCodeId) {
+            DBHelper.createUser(1);
+            Navigator.pushNamedAndRemoveUntil(
+                context, Routes.OTP, (route) => false, arguments: {
+              'phoneNumber': phoneNumber,
+              'smsCodeId': smsCodeId
+            });
+          },
+          codeAutoRetrievalTimeout: (String smsCodeId) {});
+    } on FirebaseAuth catch (e) {
+      showAlertDialogue(context: context, message: e.toString());
     }
   }
 }
