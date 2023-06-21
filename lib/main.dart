@@ -7,16 +7,14 @@ import 'package:task_manager/common/utils/constants.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:task_manager/features/auth/controllers/user_controller.dart';
 import 'package:task_manager/features/onboarding/pages/onboarding.dart';
-// import 'package:task_manager/features/onboarding/pages/onboarding.dart';
 
 import 'common/models/user_model.dart';
 import 'features/todo/pages/homepage.dart';
-import 'firebase_options.dart';
 
-void main() async {
+Future<void>main()async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-  options: DefaultFirebaseOptions.currentPlatform,
+  // options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(const ProviderScope(child: MyApp()));
 }
@@ -32,8 +30,8 @@ class MyApp extends ConsumerWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.read(userProvider.notifier).refresh();
-    List<UserModel> users = ref.watch(userProvider);
+    // ref.read(userProvider.notifier).refresh();
+    // List<UserModel> users = ref.watch(userProvider);
     return ScreenUtilInit(
         useInheritedMediaQuery: true,
         designSize: const Size(375, 825),
@@ -54,10 +52,12 @@ class MyApp extends ConsumerWidget {
                   scaffoldBackgroundColor: AppConst.kBkDark,
                   useMaterial3: true),
               themeMode: ThemeMode.dark,
-              home: users.isNotEmpty ? const Onboarding() : const HomePage(),
+              home: const Onboarding(),
               onGenerateRoute: Routes.onGenerateRoute,
             );
           });
         });
   }
 }
+
+//users.isEmpty ? const Onboarding() : const HomePage()

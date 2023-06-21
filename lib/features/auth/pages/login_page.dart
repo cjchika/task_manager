@@ -7,6 +7,9 @@ import 'package:task_manager/common/widgets/appstyle.dart';
 import 'package:task_manager/common/widgets/custom_btn_otl.dart';
 import 'package:task_manager/common/widgets/height_spacer.dart';
 import 'package:task_manager/common/widgets/reusable_text.dart';
+import 'package:task_manager/common/widgets/show_dialogue.dart';
+import 'package:task_manager/features/auth/controllers/auth_controller.dart';
+import 'package:task_manager/features/auth/controllers/code_provider.dart';
 
 import '../../../common/widgets/custom_text_field.dart';
 import 'otp_page.dart';
@@ -21,17 +24,32 @@ class LoginPage extends ConsumerStatefulWidget {
 class _LoginPageState extends ConsumerState<LoginPage> {
   final TextEditingController phone = TextEditingController();
   Country country = Country(
-    phoneCode: '1',
-    countryCode: 'US',
+    phoneCode: '234',
+    countryCode: 'NG',
     e164Sc: 0,
     geographic: true,
     level: 1,
-    name: 'USA',
-    example: 'USA',
-    displayName: 'United States',
-    displayNameNoCountryCode: 'US',
+    name: 'Nigeria',
+    example: 'Nigeria',
+    displayName: 'Nigeria',
+    displayNameNoCountryCode: 'NG',
     e164Key: '',
   );
+
+  sendCodeToUser() {
+    if (phone.text.isEmpty) {
+      return showAlertDialogue(
+          context: context, message: "Please enter your phone number");
+    } else if (phone.text.length < 8) {
+      return showAlertDialogue(
+          context: context, message: "Invalid phone number.");
+    } else {
+      print('+${country.phoneCode}${phone.text}');
+      ref.read(authControllerProvider).sendSms(
+          context: context,
+          phoneNumber: '+${country.phoneCode}${phone.text}');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,15 +86,22 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             context: context,
                             countryListTheme: CountryListThemeData(
                               backgroundColor: AppConst.kBkDark,
-                              textStyle: appStyle(16, AppConst.kLight, FontWeight.w500),
-                              inputDecoration: InputDecoration(hintStyle: appStyle(16, AppConst.kLight, FontWeight.w600)),
+                              textStyle: appStyle(
+                                  16, AppConst.kLight, FontWeight.w500),
+                              inputDecoration: InputDecoration(
+                                  hintStyle: appStyle(
+                                      16, AppConst.kLight, FontWeight.w600)),
                               bottomSheetHeight: AppConst.kHeight * 0.6,
                               borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(10.5),
                                 topRight: Radius.circular(10.5),
                               ),
                             ),
-                            onSelect: (code) => setState(() {}));
+                            onSelect: (code) {
+                              setState(() {
+                                country = code;
+                              });
+                            });
                       },
                       child: ReusableText(
                         text: "${country.flagEmoji} + ${country.phoneCode}",
@@ -94,7 +119,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 padding: const EdgeInsets.all(10.0),
                 child: CustomOutlineButton(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const OtpPage(smsCodeId: '', phoneNumber: '',)));
+                    sendCodeToUser();
                   },
                   width: AppConst.kWidth * 0.9,
                   height: AppConst.kHeight * 0.07,

@@ -47,6 +47,7 @@ dependencies:
   dynamic_color: ^1.6.5
   flutter_datetime_picker_plus: ^2.0.1
   firebase_auth: ^4.6.3
+  cloud_firestore:
 
 dev_dependencies:
   flutter_test:
